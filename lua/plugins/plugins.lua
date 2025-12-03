@@ -58,5 +58,24 @@ return {
     end,
   },
 
+  { "folke/flash.nvim", enabled = false },
 
+  {
+    "nvim-mini/mini.surround",
+    version = "*",
+    config = function()
+      require("mini.surround").setup({
+        mappings = {
+          add = "sa", -- đổi từ gsa → sa
+          delete = "sd",
+          find = "sf",
+          find_left = "sF",
+          highlight = "sh",
+          replace = "sr",
+          update_n_lines = "sn",
+        },
+        highlight_duration = 3500,
+      })
+    end,
+  },
 }
