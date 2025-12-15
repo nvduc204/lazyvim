@@ -17,8 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
--- vim.g.lazyvim_check_order = false
-
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins

@@ -1,45 +1,66 @@
 return {
-  -- 🌙 Tokyonight theme (vẫn load sớm, vì cần cho UI ngay từ đầu)
+
+  -- 🌙 Tokyonight theme
   {
     "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     opts = {
       style = "moon",
       transparent = true,
       styles = {
-        sidebars = "transparent",
-        floats = "transparent",
+        -- sidebars = "transparent",
+        floats = "normal",
       },
     },
   },
 
-  -- 🔍 Telescope – chỉ load khi nhấn phím tắt
+  -- ⭐ Project.nvim — load sớm để Projects hoạt động ngay lần đầu
+  {
+    "ahmedkhalf/project.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("project_nvim").setup({
+        detection_methods = { "pattern", "lsp" },
+        patterns = { ".git", "package.json", "Makefile" },
+        silent_chdir = true,
+      })
+    end,
+  },
+
+  -- 🔍 Telescope – lazy load bằng lệnh
   {
     "nvim-telescope/telescope.nvim",
-    cmd = "Telescope", -- chỉ load khi gọi lệnh Telescope
-    keys = {
-      {
-        "<leader>fp",
-        function()
-          require("telescope.builtin").find_files({
-            cwd = require("lazy.core.config").options.root,
-          })
-        end,
-        desc = "Find Plugin File",
-      },
-    },
-    opts = {
-      defaults = {
-        layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
-        sorting_strategy = "ascending",
-        winblend = 0,
-      },
-    },
+    cmd = "Telescope",
+    dependencies = { "nvim-lua/plenary.nvim" },
+
+    opts = function()
+      local actions = require("telescope.actions")
+      return {
+        defaults = {
+          initial_mode = "normal",
+          winblend = 0,
+          layout_strategy = "horizontal",
+          layout_config = { prompt_position = "top" },
+          sorting_strategy = "ascending",
+
+          mappings = {
+            n = {
+              q = actions.close, -- nhấn q để thoát
+            },
+          },
+        },
+      }
+    end,
+
+    config = function(_, opts)
+      local telescope = require("telescope")
+      telescope.setup(opts)
+
+      telescope.load_extension("projects") -- ⭐ extension cho project.nvim
+    end,
   },
 
-  -- 🧠 LSP Config – chỉ load khi đọc file (chứ không khi mở nvim trống)
+  -- 🧠 LSP — load khi mở file
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -48,7 +69,7 @@ return {
     },
   },
 
-  -- 🌳 Treesitter – lazy load sau khi mở file
+  -- 🌳 Treesitter — load khi mở file
   {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
@@ -58,15 +79,15 @@ return {
     end,
   },
 
-  { "folke/flash.nvim", enabled = false },
-
+  -- ✂ Mini Surround — plugin nhẹ, giữ simple
   {
     "nvim-mini/mini.surround",
     version = "*",
+    event = "VeryLazy",
     config = function()
       require("mini.surround").setup({
         mappings = {
-          add = "sa", -- đổi từ gsa → sa
+          add = "sa",
           delete = "sd",
           find = "sf",
           find_left = "sF",
@@ -78,4 +99,6 @@ return {
       })
     end,
   },
+
+  { "folke/flash.nvim", enabled = false },
 }
