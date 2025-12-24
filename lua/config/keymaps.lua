@@ -1,7 +1,7 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps here
 local map = vim.keymap.set
-
--- Compile & Run cho nhiều ngôn ngữ (Windows)
-
 map("n", "<F5>", function()
   vim.cmd("w") -- Lưu file trước
 
@@ -33,11 +33,6 @@ map("n", "<F5>", function()
 end, { desc = "Compile & Run (tự động nhận diện ngôn ngữ)" })
 
 map("n", "<C-a>", "<cmd>normal! ggVG<CR>", { desc = "Select all", noremap = true })
-
--- map("n", "<C-v>", '"+p', { noremap = true, silent = true, desc = "Paste from system clipboard" })
-
--- map("v", "<C-c>", '"+y', { desc = "Copy to system clipboard", noremap = true, silent = true })
-
--- jk để thoát Insert Mode
-
-vim.keymap.set("i", "jk", "<Esc>", { noremap = true, silent = true })
+map("i", "jk", "<Esc>", { desc = "Exit insert mode with jk" })
+map("t", "jk", "<C-\\><C-n>", { desc = "Exit terminal mode with jk" })
+map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })

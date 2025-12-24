@@ -13,18 +13,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   end
 end
 vim.opt.rtp:prepend(lazypath)
--- ✅ Load your core Neovim configuration
-require("config.options")
-require("config.keymaps")
-require("config.autocmds")
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
     { import = "lazyvim.plugins.extras.lang.typescript" },
+    -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
     { import = "lazyvim.plugins.extras.lang.json" },
-
     -- import/override with your plugins
     { import = "plugins" },
   },
