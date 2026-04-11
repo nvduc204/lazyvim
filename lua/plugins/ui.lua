@@ -1,6 +1,7 @@
 return {
   {
     "folke/noice.nvim",
+    event = "VeryLazy",
     opts = {
       presets = {
         lsp_doc_border = true,
@@ -17,6 +18,7 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
     opts = {
       sections = {
         lualine_c = {
@@ -33,7 +35,7 @@ return {
       },
     },
   },
-  -- { "folke/flash.nvim", enabled = false },
+  { "folke/flash.nvim", enabled = false },
   { "akinsho/bufferline.nvim", enabled = false },
   {
     "rachartier/tiny-inline-diagnostic.nvim",
