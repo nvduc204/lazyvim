@@ -1,7 +1,7 @@
 return {
   {
     "saghen/blink.cmp",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     lazy = true,
     opts = function(_, opts)
       opts.enabled = function()

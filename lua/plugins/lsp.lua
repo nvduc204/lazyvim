@@ -5,7 +5,7 @@ return {
       diagnostics = { virtual_text = false },
       servers = {
         -- Disable bashls (comes from LazyVim extras.util.dot) to stop auto install
-        jdtls = {},
+        -- jdtls = {},
         tsserver = {},
         clangd = {
           -- Sửa lỗi encoding UTF-8/UTF-16 conflict với Copilot

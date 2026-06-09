@@ -3,9 +3,13 @@ return {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
-      presets = {
-        lsp_doc_border = true,
-      },
+      lsp = {
+        progress = {
+          enabled = false,
+        },
+      }, -- presets = {
+      --   lsp_doc_border = true,
+      -- },
     },
   },
   {
@@ -24,7 +28,7 @@ return {
         lualine_c = {
           {
             "filename",
-            path = 1,
+            path = 0,
             symbols = {
               modified = " ●",
               readonly = " ",
@@ -36,7 +40,6 @@ return {
     },
   },
   { "folke/flash.nvim", enabled = false },
-  { "akinsho/bufferline.nvim", enabled = false },
   {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy",
