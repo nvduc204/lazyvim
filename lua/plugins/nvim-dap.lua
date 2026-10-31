@@ -1,5 +1,9 @@
 return {
   "mfussenegger/nvim-dap",
+  cmd = {
+    "DapContinue",
+    "DapToggleBreakpoint",
+  },
   opts = function()
     local dap = require("dap")
     local mason = vim.fn.stdpath("data") .. "/mason/packages"

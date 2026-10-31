@@ -3,7 +3,7 @@
 -- Add any additional keymaps here
 -- jk -> Normal mode trong Insert mode
 local Snacks = require("snacks")
-vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+vim.keymap.set({ "i", "v" }, "jk", "<Esc>", { desc = "Exit insert/visual mode" })
 
 -- jk -> Normal mode trong Terminal mode
 vim.keymap.set("t", "jk", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
